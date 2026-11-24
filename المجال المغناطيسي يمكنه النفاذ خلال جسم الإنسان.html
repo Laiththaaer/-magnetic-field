@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>المجال المغناطيسي يمكنه النفاذ خلال جسم الإنسان</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#f1f5fa;--bg2:#c9d6e5;--card:rgba(255,255,255,.88);--ink:#16202c;--mut:#566679;--acc:#0f766e;--accT:#fff;--line:rgba(20,40,70,.18);--hl:#e11d48;--pw:clamp(230px,36%,340px);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#212d3b;--bg2:#0d131a;--card:rgba(22,31,42,.9);--ink:#e8eef5;--mut:#9fb0c3;--acc:#2dd4bf;--accT:#06231f;--line:rgba(200,220,255,.2);--hl:#fb7185}}
+:root[data-theme="dark"]{--bg1:#212d3b;--bg2:#0d131a;--card:rgba(22,31,42,.9);--ink:#e8eef5;--mut:#9fb0c3;--acc:#2dd4bf;--accT:#06231f;--line:rgba(200,220,255,.2);--hl:#fb7185}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;height:100%;font-family:'Tajawal',system-ui,sans-serif;color:var(--ink);background:var(--bg2);overflow:hidden}
+#app{position:relative;height:100%}
+#wrap{position:absolute;top:0;bottom:0;left:0;right:var(--pw);background:radial-gradient(ellipse at 50% 30%,var(--bg1),var(--bg2))}
+#stage{position:absolute;inset:0;touch-action:none}
+#stage canvas{display:block;width:100%;height:100%}
+#panel{position:absolute;top:0;bottom:0;right:0;width:var(--pw);overflow-y:auto;padding:8px 10px;background:var(--card);border-left:1px solid var(--line);font-size:13px;line-height:1.65}
+.tag{display:flex;border-radius:7px;overflow:hidden;font-weight:700;margin-bottom:6px}
+.tag span{background:#16a34a;color:#fff;padding:5px 11px;font-size:14px;white-space:nowrap}
+.tag h1{margin:0;flex:1;font-size:12.5px;background:#f8c9b4;color:#2b1a12;padding:5px 8px;line-height:1.5}
+.b{color:#1e88c7;font-weight:700}.m{color:#c0267a;font-weight:700}
+p{margin:0 0 3px}
+ul{list-style:none;margin:2px 0 0;padding:0}
+li{color:var(--mut);padding:2px 0}li::before{content:"– "}
+li.active{color:var(--ink);font-weight:700;background:rgba(225,29,72,.1);border-radius:6px;padding:2px 4px}
+li.done{color:var(--acc)}
+#main{display:block;width:100%;margin:7px 0 3px;background:var(--hl);color:#fff;border-color:var(--hl);font-weight:700;font-size:14px;padding:8px}
+#main:disabled{opacity:.55}
+#result{margin-top:7px;padding:8px;border:1px dashed var(--line);border-radius:9px;font-size:12.5px;line-height:1.7}
+#result .ob{color:#c0267a;font-weight:700}
+#result small{display:block;color:var(--mut);margin-top:4px}
+#ctl{position:absolute;bottom:5px;left:6px;right:6px;display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;align-items:center}
+button{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 10px;border-radius:10px;cursor:pointer;white-space:nowrap;flex:none}
+button:active{transform:scale(.97)}
+button.on{background:var(--acc);color:var(--accT);border-color:var(--acc)}
+.sl{display:flex;align-items:center;gap:6px;flex:none;font-size:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 10px}
+.sl input{width:110px;accent-color:var(--hl)}
+.lbl{position:absolute;transform:translate(-50%,-50%);font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:7px;background:var(--card);border:1px solid var(--line);pointer-events:none;white-space:nowrap}
+[hidden]{display:none!important}
+@media (orientation:portrait){#panel{left:0;width:auto;bottom:auto;max-height:46%;border-left:0;border-bottom:1px solid var(--line)}#wrap{top:46%;right:0}}
+</style>
+</head>
+<body>
+<div id="app">
+<div id="wrap"><div id="stage"></div>
+<nav id="ctl">
+<div class="sl"><span>اليد</span><input id="hy" type="range" min="0" max="100" value="50"></div>
+<button id="top">عرض علوي</button><button id="bot">عرض سفلي</button><button id="side">عرض جانبي</button><button id="reset">إعادة التجربة</button><button id="pause">إيقاف الحركة</button><button id="fl">خطوط المجال</button><button id="lab">التسميات</button>
+</nav>
+</div>
+<aside id="panel">
+<div class="tag"><span>نشاط (1)</span><h1>المجال المغناطيسي يمكنه النفاذ خلال جسم الإنسان</h1></div>
+<p><span class="b">أدوات النشاط:</span> مجموعة من مثبتات الورق مصنوعة من الفولاذ (مواد فيرومغناطيسية)، مغناطيس قوي.</p>
+<div class="b">الخطوات:</div>
+<ul id="steps"><li>نضع الساق المغناطيسية على كف يدنا.</li><li>نضع راحة يدنا على مجموعة من مثبتات الورق.</li><li>نرفع كف يدنا إلى الأعلى. ماذا نلاحظ؟</li></ul>
+<button id="main"></button>
+<div id="result" hidden>
+<p class="ob">نجد أن مجموعة كبيرة منها قد انجذبت إلى راحة كف يدنا. الشكل (18). ما تفسير ذلك؟</p>
+<p><span class="m">الجواب هو:</span> أن المجال المغناطيسي يمكنه النفاذ خلال جسم الإنسان.</p>
+<small>الشكل (18) المجال المغناطيسي يمكنه النفاذ من خلال جسم الإنسان.</small>
+</div>
+</aside>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const T=THREE,$=s=>document.querySelector(s),stage=$('#stage');
+const renderer=new T.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+renderer.outputEncoding=T.sRGBEncoding;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+stage.appendChild(renderer.domElement);
+const scene=new T.Scene(),camera=new T.PerspectiveCamera(40,1,.1,100);
+// studio environment for realistic metal
+(function(){const pm=new T.PMREMGenerator(renderer),es=new T.Scene();
+ const sg=new T.SphereGeometry(20,32,16),pa=sg.attributes.position,cl=[];
+ for(let i=0;i<pa.count;i++){const v=.3+.5*(pa.getY(i)/20+1)/2;cl.push(v,v,v*1.04);}
+ sg.setAttribute('color',new T.Float32BufferAttribute(cl,3));
+ es.add(new T.Mesh(sg,new T.MeshBasicMaterial({side:T.BackSide,vertexColors:true})));
+ [[8,10,6],[-10,6,-4],[0,12,-10],[-6,4,9]].forEach(p=>{const b=new T.Mesh(new T.PlaneGeometry(8,5),new T.MeshBasicMaterial({color:0xffffff,side:T.DoubleSide}));b.position.set(...p);b.lookAt(0,0,0);es.add(b);});
+ scene.environment=pm.fromScene(es,.02).texture;})();
+scene.add(new T.HemisphereLight(0xffffff,0x8899aa,.5));
+const sun=new T.DirectionalLight(0xffffff,1.1);sun.position.set(4,10,6);sun.castShadow=true;
+sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-7,right:7,top:7,bottom:-7,near:1,far:30});sun.shadow.bias=-.0004;scene.add(sun);
+const table=new T.Mesh(new T.PlaneGeometry(40,40),new T.MeshStandardMaterial({color:0x0b0c0f,roughness:.55}));
+table.rotation.x=-Math.PI/2;table.receiveShadow=true;scene.add(table);
+// ---------- hand ----------
+const skin=new T.MeshStandardMaterial({color:0xb0704f,roughness:.7,metalness:0,envMapIntensity:.1}),
+ nailM=new T.MeshStandardMaterial({color:0xf0c9b8,roughness:.35,envMapIntensity:.5});
+const hand=new T.Group();scene.add(hand);const dump=new T.Group();
+function mesh(g,m,x,y,z,p){const o=new T.Mesh(g,m);o.position.set(x,y,z);o.castShadow=true;(p||dump).add(o);return o;}
+mesh(new T.SphereGeometry(1,40,24),skin,0,0,0).scale.set(.98,.21,.82);
+[-.5,-.17,.17,.5].forEach(z=>mesh(new T.SphereGeometry(.15,16,12),skin,.78,.06,z));
+mesh(new T.SphereGeometry(.33,20,14),skin,-.2,-.06,.45).scale.set(1.2,.6,.9);
+const fa=mesh(new T.CylinderGeometry(.5,.42,2.8,32),skin,-1.95,0,0);fa.rotation.z=Math.PI/2;fa.scale.x=.75;
+const cloth=new T.MeshStandardMaterial({color:0x44556b,roughness:.95,envMapIntensity:.1});
+const sl=mesh(new T.CylinderGeometry(.66,.66,1.3,32),cloth,-3.1,0,0);sl.rotation.z=Math.PI/2;sl.scale.x=.85;
+function finger(z,L,r,yaw,x0){const g=new T.Group();g.position.set(x0,0,z);g.rotation.y=yaw;dump.add(g);
+ let x=0;[.42,.3,.28].forEach((f,i)=>{const l=f*L,r0=r*(1-i*.08),r1=r*(1-(i+1)*.08);
+  const c=mesh(new T.CylinderGeometry(r1,r0,l,16),skin,x+l/2,0,0,g);c.rotation.z=-Math.PI/2;
+  mesh(new T.SphereGeometry(r1,16,12),skin,x+l,0,0,g);x+=l;});
+ const n=mesh(new T.SphereGeometry(r*.75,12,8),nailM,x-r*.5,r*.62,0,g);n.scale.set(.9,.3,.8);n.castShadow=false;}
+finger(-.52,1.55,.13,.06,.75);finger(-.18,1.7,.135,.02,.78);finger(.17,1.6,.13,-.03,.78);finger(.5,1.3,.115,-.1,.72);
+finger(.66,1.4,.17,-.85,-.05);
+// realistic hand
+const dsk=new T.MeshStandardMaterial({color:0x96593c,roughness:.8,envMapIntensity:.05}),lsk=new T.MeshStandardMaterial({color:0xc08460,roughness:.7,envMapIntensity:.1}),cuffM=new T.MeshStandardMaterial({color:0xdfe6ee,roughness:.9,envMapIntensity:.1}),SG=new T.SphereGeometry(1,32,20);
+function hm(g,m,x,y,z,p,sx,sy,sz){const o=new T.Mesh(g,m);o.position.set(x,y,z);if(sx)o.scale.set(sx,sy,sz);o.castShadow=true;(p||hand).add(o);return o;}
+hm(SG,skin,0,0,0,hand,.98,.2,.82);
+hm(SG,skin,-.1,-.07,.5,hand,.55,.15,.38);hm(SG,skin,-.1,-.06,-.52,hand,.55,.14,.3);hm(SG,skin,-.78,-.02,0,hand,.5,.2,.55);
+[-.55,-.18,.19,.54].forEach(z=>{hm(SG,dsk,.78,.07,z,hand,.14,.1,.13);hm(SG,lsk,.3,.165,z*.8,hand,.5,.03,.04);});
+const fa2=hm(new T.CylinderGeometry(.53,.4,2.9,40),skin,-2.05,0,0);fa2.rotation.z=Math.PI/2;fa2.scale.set(.72,1,1);
+const sl2=hm(new T.CylinderGeometry(.68,.68,1.3,40),cloth,-3.2,0,0);sl2.rotation.z=Math.PI/2;sl2.scale.x=.85;
+const cf=hm(new T.TorusGeometry(.68,.05,12,40),cuffM,-2.55,0,0);cf.rotation.y=Math.PI/2;cf.scale.set(1,.85,1);
+function fing(z,L,r,yaw,x0,bend,y0){const g=new T.Group();g.position.set(x0,y0||0,z);g.rotation.y=yaw;hand.add(g);let par=g;
+ [.44,.3,.26].forEach((f,i)=>{const l=f*L,r0=r*(1-i*.09),r1=r*(1-(i+1)*.09-(i===2?.04:0));
+  const s=new T.Group();s.rotation.z=-bend;par.add(s);
+  const c=hm(new T.CylinderGeometry(r1,r0,l,20),skin,l/2,0,0,s);c.rotation.z=-Math.PI/2;
+  hm(SG,skin,l,0,0,s,r1,r1,r1);
+  if(i<2){const cr=hm(new T.TorusGeometry(r1,.012,6,18),dsk,l,0,0,s);cr.rotation.y=Math.PI/2;cr.castShadow=false;}
+  else{const n=hm(SG,nailM,l-r1*.6,r1*.62,0,s,r1*1.0,r1*.28,r1*.75);n.castShadow=false;}
+  par=new T.Group();par.position.x=l;s.add(par);});}
+fing(.54,1.55,.125,-.06,.76,.07);fing(.19,1.72,.13,-.01,.8,.07);fing(-.18,1.58,.122,.04,.78,.07);fing(-.55,1.25,.108,.1,.7,.07);
+fing(.62,1.5,.17,-.8,-.05,.03,-.05);
+// name on the black table
+const nameCv=document.createElement('canvas');nameCv.width=1024;nameCv.height=256;
+const nameTex=new T.CanvasTexture(nameCv);nameTex.anisotropy=4;
+function drawName(){const g=nameCv.getContext('2d');g.clearRect(0,0,1024,256);g.direction='rtl';g.textAlign='center';g.textBaseline='middle';
+ g.fillStyle='#ffffff';let fs=104;g.font='700 104px Tajawal,Arial,sans-serif';while(g.measureText('إعداد الأستاذ ليث ثائر محمد').width>930&&fs>40){fs-=4;g.font='700 '+fs+'px Tajawal,Arial,sans-serif';}g.fillText('إعداد الأستاذ ليث ثائر محمد',512,112);
+ g.fillStyle='#f5c542';g.fillRect(162,196,700,6);nameTex.needsUpdate=true;}
+drawName();if(document.fonts){document.fonts.load('700 100px Tajawal').then(drawName).catch(()=>{});}
+const namePl=new T.Mesh(new T.PlaneGeometry(6.4,1.6),new T.MeshBasicMaterial({map:nameTex,transparent:true,toneMapped:false}));
+namePl.rotation.x=-Math.PI/2;namePl.position.set(0,.006,3.4);scene.add(namePl);
+// ---------- magnet ----------
+const magnet=new T.Group();scene.add(magnet);
+[[.3,0xc81e2d,'N'],[-.3,0x1d4ed8,'S']].forEach(([x,c,l])=>{
+ const b=new T.Mesh(new T.BoxGeometry(.6,.38,.46),new T.MeshStandardMaterial({color:c,roughness:.28,metalness:.55}));
+ b.position.x=x;b.castShadow=true;magnet.add(b);
+ const cv=document.createElement('canvas');cv.width=cv.height=128;const g=cv.getContext('2d');
+ g.fillStyle='#fff';g.font='bold 96px sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(l,64,70);
+ const p=new T.Mesh(new T.PlaneGeometry(.3,.3),new T.MeshBasicMaterial({map:new T.CanvasTexture(cv),transparent:true}));
+ p.rotation.x=-Math.PI/2;p.position.set(x,.192,0);magnet.add(p);});
+// field lines (optional layer, follow the magnet)
+const lines=new T.Group();lines.visible=false;magnet.add(lines);
+function B3(p){const r=new T.Vector3();[[.45,1],[-.45,-1]].forEach(([x,q])=>{const d=new T.Vector3(p.x-x,p.y,p.z),l=d.length();r.addScaledVector(d,q/(l*l*l));});return r;}
+function buildLines(){
+ const mat=new T.LineBasicMaterial({color:0x22a7f0,transparent:true,opacity:.85,depthTest:false}),cm=new T.MeshBasicMaterial({color:0x22a7f0,depthTest:false});
+ [15,45,75].forEach(al=>{for(let k=0;k<8;k++){
+  const A=al*Math.PI/180,P=k*Math.PI/4,d=new T.Vector3(Math.cos(A),Math.sin(A)*Math.cos(P),Math.sin(A)*Math.sin(P));
+  const p=new T.Vector3(.45,0,0).addScaledVector(d,.2),pts=[p.clone()];
+  for(let i=0;i<500;i++){p.addScaledVector(B3(p).normalize(),.06);
+   if(p.y<-.85||p.length()>6)break;pts.push(p.clone());if(Math.hypot(p.x+.45,p.y,p.z)<.15)break;}
+  if(pts.length<8)return;
+  const l=new T.Line(new T.BufferGeometry().setFromPoints(pts),mat);l.renderOrder=5;lines.add(l);
+  const m=pts.length>>1,tg=pts[m+1].clone().sub(pts[m]).normalize(),c=new T.Mesh(new T.ConeGeometry(.05,.15,10),cm);
+  c.position.copy(pts[m]);c.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),tg);c.renderOrder=5;lines.add(c);}});
+}
+// ---------- paper clips ----------
+const MC=60,C=12,K=5,LS=.62;
+const cpath=[[.07,-.12],[.07,.22],[0,.30],[-.07,.22],[-.07,-.30],[0,-.40],[.12,-.36],[.16,-.28],[.16,.30],[.10,.42],[0,.45],[-.10,.42],[-.16,.30],[-.16,-.15]].map(([x,y])=>new T.Vector3(x,y-.02,0));
+const cg=new T.TubeGeometry(new T.CatmullRomCurve3(cpath,false,'centripetal'),140,.018,6,false);
+const cm_=new T.InstancedMesh(cg,new T.MeshStandardMaterial({color:0xd0d4da,metalness:1,roughness:.22,envMapIntensity:1.2}),MC);
+cm_.castShadow=true;cm_.frustumCulled=false;scene.add(cm_);
+const cp=[],cvel=[],cq=[],q0=[],cst=new Int8Array(MC),cch=new Int16Array(MC),clv=new Int16Array(MC),rr=new Float32Array(MC);
+let chains=[],restY=.6;
+const AX=[],AZ=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++){AX.push(-.55+c*.42+(Math.random()-.5)*.1);AZ.push((r-1)*.42+(Math.random()-.5)*.1);}
+const qa=new T.Quaternion(),qb=new T.Quaternion(),qf=new T.Quaternion().setFromAxisAngle(new T.Vector3(1,0,0),-Math.PI/2),Y=new T.Vector3(0,1,0);
+function initClips(){chains=[];for(let c=0;c<C;c++)chains.push([]);let top=0;
+ for(let i=0;i<MC;i++){const a=Math.random()*6.283,r=Math.sqrt(Math.random());
+  let x=Math.cos(a)*r*.7,z=Math.sin(a)*r*.5,n=0;
+  for(let j=0;j<i;j++)if(Math.hypot(cp[j].x-x,cp[j].z-z)<.38)n++;
+  const y=.02+Math.min(n,9)*.033;top=Math.max(top,y);
+  cp[i]=new T.Vector3(x,y,z);cvel[i]=new T.Vector3();
+  qa.setFromAxisAngle(Y,Math.random()*6.283);
+  const ax=new T.Vector3(Math.random()-.5,0,Math.random()-.5).normalize();
+  qb.setFromAxisAngle(ax,(Math.random()-.5)*(n?.7:.1));
+  cq[i]=new T.Quaternion().copy(qb).multiply(qa).multiply(qf);
+  cst[i]=0;rr[i]=.3+Math.random()*.6;q0[i]=cq[i].clone();mode[i]=0;sf[i]=0;par[i]=-1;kid[i]=0;lvl[i]=0;wv[i].set(0,0,0);}
+ settlePile();let tp=0;for(let i=0;i<MC;i++)tp=Math.max(tp,cp[i].y);restY=tp+.3;}
+// ---------- camera ----------
+const cam={th:.6,ph:1.15,r:12},goal={...cam},tgt=new T.Vector3(0,1.8,0);
+function fitR(){const asp=stage.clientWidth/Math.max(1,stage.clientHeight);return Math.max(11,9/(.728*asp));}
+function view(th,ph,k){goal.th=th;goal.ph=ph;goal.r=fitR()+k;cam.th=((cam.th+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI;}
+function applyCam(){for(const k in cam)cam[k]+=(goal[k]-cam[k])*.12;
+ camera.position.set(tgt.x+cam.r*Math.sin(cam.ph)*Math.sin(cam.th),tgt.y+cam.r*Math.cos(cam.ph),tgt.z+cam.r*Math.sin(cam.ph)*Math.cos(cam.th));camera.lookAt(tgt);}
+function resize(){const w=Math.max(1,stage.clientWidth),h=Math.max(1,stage.clientHeight);renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();}
+addEventListener('resize',resize);
+const ptrs=new Map();let pd=0;const cv=renderer.domElement;
+let hd=null;const ray=new T.Raycaster(),pl_=new T.Plane(new T.Vector3(0,1,0),0),hp_=new T.Vector3();
+function rayAt(e){const r=cv.getBoundingClientRect();ray.setFromCamera(new T.Vector2((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1),camera);}
+cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});if(ptrs.size===2){hd=null;md=null;const[a,b]=[...ptrs.values()];pd=Math.hypot(a.x-b.x,a.y-b.y);}
+ if(ptrs.size===1){rayAt(e);const mh=ray.intersectObject(magnet,true)[0],h=ray.intersectObject(hand,true)[0];if(mh&&(!h||mh.distance<=h.distance)){pl_.setFromNormalAndCoplanarPoint(camera.getWorldDirection(new T.Vector3()),mh.point);if(ray.ray.intersectPlane(pl_,hp_)){md={dx:magnet.position.x-hp_.x,dy:magnet.position.y-hp_.y,dz:magnet.position.z-hp_.z};magFree=true;magnet.rotation.y=0;carry=false;mV.set(0,0,0);lastMT=performance.now();if(!magOn){tws=tws.filter(w=>w.o!==Mu);Mu.u=0;$('#main').disabled=tws.length>0;}}}else if(h){const vm=cam.ph>1.0;pl_.setFromNormalAndCoplanarPoint(vm?new T.Vector3(Math.sin(cam.th),0,Math.cos(cam.th)):new T.Vector3(0,1,0),h.point);
+  if(ray.ray.intersectPlane(pl_,hp_)){hd={vm,dx:Hs.x-hp_.x,dy:Hs.y-hp_.y,dz:Hs.z-hp_.z};tws=tws.filter(w=>w.o!==Hs);$('#main').disabled=tws.length>0;}}}});
+cv.addEventListener('pointermove',e=>{const p=ptrs.get(e.pointerId);if(!p)return;const dx=e.clientX-p.x,dy=e.clientY-p.y;p.x=e.clientX;p.y=e.clientY;
+ if(md&&ptrs.size===1){rayAt(e);if(ray.ray.intersectPlane(pl_,hp_)){const nx=hp_.x+md.dx,ny=hp_.y+md.dy,nz=hp_.z+md.dz,now=performance.now(),dtm=(now-lastMT)/1000;if(dtm>.002){mV.lerp(new T.Vector3((nx-magnet.position.x)/dtm,(ny-magnet.position.y)/dtm,(nz-magnet.position.z)/dtm),.5);if(mV.length()>10)mV.setLength(10);}lastMT=now;magnet.position.set(nx,ny,nz);}return;}
+ if(hd&&ptrs.size===1){rayAt(e);if(ray.ray.intersectPlane(pl_,hp_)){Hs.x=Math.max(-3,Math.min(3,hp_.x+hd.dx));Hs.z=Math.max(-2.6,Math.min(2.6,hp_.z+hd.dz));if(hd.vm)Hs.y=Math.max(restY,Math.min(HMAX,hp_.y+hd.dy));}return;}
+ if(ptrs.size===2){const[a,b]=[...ptrs.values()],d=Math.hypot(a.x-b.x,a.y-b.y);goal.r=Math.max(4,Math.min(24,goal.r*pd/d));pd=d;return;}
+ goal.th-=dx*.006;goal.ph=Math.max(.05,Math.min(3.09,goal.ph-dy*.006));cam.th=goal.th;cam.ph=goal.ph;});
+const upf=e=>{ptrs.delete(e.pointerId);hd=null;if(md){md=null;if(performance.now()-lastMT>80)mV.set(0,0,0);}};cv.addEventListener('pointerup',upf);cv.addEventListener('pointercancel',upf);
+cv.addEventListener('wheel',e=>{e.preventDefault();goal.r=Math.max(4,Math.min(24,goal.r*(1+e.deltaY*.001)));},{passive:false});
+// ---------- experiment logic ----------
+const HMAX=3.8,Hs={x:0,y:1.9,z:0},MSTART=new T.Vector3(-3.5,.19,1.5),Mu={u:0};
+let step=0,magOn=false,paused=false,tws=[],labsOn=false,linesOn=false;
+function tw(o,k,to,dur,done,ease){tws.push({o,k,f:o[k],to,dur,t:0,done,ease});}
+const mag_off=new T.Vector3(.1,.4,0);
+function placeMagnet(){if(magFree){resolveMagnet();return;}const hp=new T.Vector3(hand.position.x,Hs.y,hand.position.z).add(mag_off);
+ if(magOn)magnet.position.copy(hp);
+ else{const u=Mu.u,e=u;magnet.position.lerpVectors(MSTART,hp,e);magnet.position.y+=Math.sin(Math.PI*u)*.9;magnet.rotation.y=(1-u)*.6;}
+ if(magOn)magnet.rotation.y=0;}
+const BTN=['نضع الساق المغناطيسية على كف يدنا','نضع راحة يدنا على مجموعة من مثبتات الورق','نرفع كف يدنا إلى الأعلى','نعيد التجربة'];
+function setStep(n){step=n;const li=$('#steps').children;
+ li[0].className=n===0?'active':'done';li[1].className=n<1?'':n===1?'active':'done';li[2].className=n<2?'':n===2?'active':'done';
+ $('#main').textContent=BTN[n];$('#result').hidden=n<3;cv.style.cursor='grab';
+ if(n===3)setTimeout(()=>$('#result').scrollIntoView({block:'nearest'}),50);}
+function busy(){return tws.length>0;}
+function mainAct(){
+ if(step===3){resetAll();return;}
+ if(busy())return;
+ if(step===0){MSTART.copy(magnet.position);magFree=false;Mu.u=0;tw(Mu,'u',1,1.4,()=>{magOn=true;setStep(1);});$('#main').disabled=true;}
+ else if(step===1){tw(Hs,'y',restY,1.6,()=>setStep(2));$('#main').disabled=true;}
+ else if(step===2){tw(Hs,'y',HMAX,5.5,()=>setStep(3),1);$('#main').disabled=true;}}
+function resetAll(){tws=[];Mu.u=0;magOn=false;Hs.x=0;Hs.z=0;Hs.y=1.9;magFree=false;carry=false;md=null;MSTART.set(-3.5,.19,1.5);pHx=0;pHy=1.9;pHz=0;initClips();setStep(0);$('#main').disabled=false;view(.6,1.15,1.5);}
+$('#main').onclick=mainAct;$('#reset').onclick=resetAll;
+$('#hy').oninput=e=>{tws=tws.filter(w=>w.o!==Hs);$('#main').disabled=tws.length>0;Hs.y=restY+(e.target.value/100)*(HMAX-restY);};
+$('#top').onclick=()=>view(0,.05,0);$('#bot').onclick=()=>view(0,3,0);$('#side').onclick=()=>view(0,1.5,0);
+$('#pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'متابعة الحركة':'إيقاف الحركة';e.target.classList.toggle('on',paused);};
+$('#fl').onclick=e=>{linesOn=!linesOn;e.target.classList.toggle('on',linesOn);if(linesOn&&!lines.children.length)buildLines();};
+$('#lab').onclick=e=>{labsOn=!labsOn;e.target.classList.toggle('on',labsOn);};
+const tmp=new T.Vector3(),one=new T.Vector3(1,1,1),M4=new T.Matrix4();
+function nextPos(c,n,out,hy){if(n===0)out.set(Hs.x+AX[c],Math.max(hy-.68,.06),Hs.z+AZ[c]);else{const t=cp[chains[c][n-1]];out.set(t.x,Math.max(t.y-LS,.06),t.z);}}
+function simOld(dt,t){
+ const hy=Hs.y;
+ if(magOn&&hy>restY+.03){let caps=0;
+  for(let j=0;j<MC&&caps<3;j++){if(cst[j])continue;let best=-1,bd=1e9;
+   for(let c=0;c<C;c++){const n=chains[c].length;if(n>=K)continue;nextPos(c,n,tmp,hy);const d=cp[j].distanceTo(tmp);if(d<bd){bd=d;best=c;}}
+   if(best<0)continue;const n=chains[best].length;
+   if(bd<rr[j]*Math.pow(.84,n)&&Math.random()<.15){cst[j]=1;cch[j]=best;clv[j]=n;chains[best].push(j);caps++;}}}
+ for(let j=0;j<MC;j++){if(!cst[j])continue;const c=cch[j],k=clv[j],am=.025*(k+1);
+  tmp.set(Hs.x+AX[c]+Math.sin(t*1.1+c*1.7+k*.5)*am,Math.max(hy-.6-k*LS,.06+k*.03),Hs.z+AZ[c]+Math.cos(t*.9+c*1.3)*am*.7);
+  const v=cvel[j],p=cp[j];
+  v.x+=((tmp.x-p.x)*28-v.x*8)*dt;v.y+=((tmp.y-p.y)*28-v.y*8)*dt;v.z+=((tmp.z-p.z)*28-v.z*8)*dt;
+  p.addScaledVector(v,dt);
+  qa.setFromAxisAngle(Y,c*.7+k*1.1);qb.setFromAxisAngle(new T.Vector3(0,0,1),Math.sin(t*1.3+j)*.06);qa.multiply(qb);
+  cq[j].slerp(qa,1-Math.exp(-6*dt));}
+}
+const RM=1.9,ZV=new T.Vector3(0,0,1),XV=new T.Vector3(1,0,0),ct=new Float32Array(MC),mp=new T.Vector3();
+function simOld2(dt,t){
+ const hy=Hs.y;
+ if(magOn){mp.set(Hs.x+.1,hy+.4,Hs.z);
+  for(let j=0;j<MC;j++){if(cst[j]||cp[j].distanceTo(mp)>=RM)continue;
+   let best=-1,bd=1e9;
+   for(let c=0;c<C;c++){const n=chains[c].length;if(n>=K)continue;nextPos(c,n,tmp,hy);const d=cp[j].distanceTo(tmp);if(d<bd){bd=d;best=c;}}
+   if(best<0)continue;cst[j]=1;cch[j]=best;clv[j]=chains[best].length;chains[best].push(j);ct[j]=t;}}
+ const h=dt/2;
+ for(let s=0;s<2;s++)for(let k=0;k<K;k++)for(let c=0;c<C;c++){const ch=chains[c];if(k>=ch.length)continue;const j=ch[k],v=cvel[j],p=cp[j];
+  if(k===0)tmp.set(Hs.x+AX[c]+Math.sin(t*1.1+c*1.7)*.015,hy-.6,Hs.z+AZ[c]+Math.cos(t*.9+c*1.3)*.015);
+  else{const q=cp[ch[k-1]];tmp.set(q.x,q.y-LS,q.z);}
+  tmp.y=Math.max(tmp.y,.06+k*.03);
+  const ramp=Math.min(1,(t-ct[j])/.5),kk=(60/(1+.3*k))*(.15+.85*ramp*ramp),cc=1.7*Math.sqrt(kk);
+  v.x+=((tmp.x-p.x)*kk-v.x*cc)*h;v.y+=((tmp.y-p.y)*kk-v.y*cc)*h;v.z+=((tmp.z-p.z)*kk-v.z*cc)*h;
+  p.addScaledVector(v,h);}
+ for(let j=0;j<MC;j++){if(!cst[j])continue;const v=cvel[j];
+  qa.setFromAxisAngle(Y,cch[j]*.7+clv[j]*1.1);
+  qb.setFromAxisAngle(ZV,Math.max(-.5,Math.min(.5,-v.x*.12)));qa.multiply(qb);
+  qb.setFromAxisAngle(XV,Math.max(-.5,Math.min(.5,v.z*.12)));qa.multiply(qb);
+  cq[j].slerp(qa,1-Math.exp(-7*dt));}
+}
+const GR=9,D0=1.35,AMAX=26,DRAG=4.5,rl=new Float32Array(MC).fill(-9);
+function simOld3(dt,t){
+ const hy=Hs.y,yb=hy-.2;
+ mp.set(Hs.x+.1,hy+.4,Hs.z);
+ const h3=dt/3;
+ for(let s=0;s<3;s++)for(let j=0;j<MC;j++){if(cst[j])continue;const p=cp[j],v=cvel[j];
+  let ax=0,ay=-GR,az=0;
+  if(magOn){const dm=Math.max(.3,p.distanceTo(mp)),a=Math.min(AMAX,GR*Math.pow(D0/dm,3));
+   tmp.set(Math.max(Hs.x-.8,Math.min(Hs.x+.8,p.x)),yb-.1,Math.max(Hs.z-.65,Math.min(Hs.z+.65,p.z))).sub(p);
+   const l=tmp.length()||1;ax=tmp.x/l*a;ay+=tmp.y/l*a;az=tmp.z/l*a;}
+  v.x+=(ax-DRAG*v.x)*h3;v.y+=(ay-DRAG*.4*v.y)*h3;v.z+=(az-DRAG*v.z)*h3;
+  p.addScaledVector(v,h3);
+  if(p.y<.02){p.y=.02;if(v.y<0)v.y=0;v.x*=.9;v.z*=.9;}
+  const rx=p.x-Hs.x,rz=p.z-Hs.z;
+  if(rz>-.85&&rz<.85&&rx>-.95&&rx<2.5&&p.y<hy+.25){const lim=(rx<.95?yb:hy-.13)-.04;if(p.y>lim){p.y=lim;if(v.y>0)v.y=0;}}}
+ if(magOn)for(let j=0;j<MC;j++){if(cst[j])continue;const p=cp[j];let best=-1,bd=1e9;
+  for(let c=0;c<C;c++){const n=chains[c].length;if(n>=K)continue;nextPos(c,n,tmp,hy);const d=p.distanceTo(tmp);if(d<bd){bd=d;best=c;}}
+  if(best>=0&&bd<.42&&t-rl[j]>1){cst[j]=1;cch[j]=best;clv[j]=chains[best].length;chains[best].push(j);ct[j]=t;}}
+ const h=dt/2;
+ for(let s=0;s<2;s++)for(let k=0;k<K;k++)for(let c=0;c<C;c++){const ch=chains[c];if(k>=ch.length)continue;const j=ch[k],v=cvel[j],p=cp[j];
+  if(k===0)tmp.set(Hs.x+AX[c]+Math.sin(t*1.1+c*1.7)*.015,hy-.6,Hs.z+AZ[c]+Math.cos(t*.9+c*1.3)*.015);
+  else{const q=cp[ch[k-1]];tmp.set(q.x,q.y-LS,q.z);}
+  tmp.y=Math.max(tmp.y,.06+k*.03);
+  const ramp=Math.min(1,(t-ct[j])/.5),kk=(60/(1+.3*k))*(.15+.85*ramp*ramp),cc=1.7*Math.sqrt(kk);
+  v.x+=((tmp.x-p.x)*kk-v.x*cc)*h;v.y+=((tmp.y-p.y)*kk-v.y*cc)*h;v.z+=((tmp.z-p.z)*kk-v.z*cc)*h;
+  p.addScaledVector(v,h);}
+ for(let c=0;c<C;c++){const ch=chains[c];for(let k=0;k<ch.length;k++){const j=ch[k];
+  const brk=k===0?cp[j].distanceTo(mp)>D0*1.4:cp[j].distanceTo(cp[ch[k-1]])>1.15;
+  if(brk){for(let m=k;m<ch.length;m++){cst[ch[m]]=0;rl[ch[m]]=t;}ch.length=k;break;}}}
+ for(let j=0;j<MC;j++){const v=cvel[j];
+  if(cst[j]){qa.setFromAxisAngle(Y,cch[j]*.7+clv[j]*1.1);
+   qb.setFromAxisAngle(ZV,Math.max(-.5,Math.min(.5,-v.x*.12)));qa.multiply(qb);
+   qb.setFromAxisAngle(XV,Math.max(-.5,Math.min(.5,v.z*.12)));qa.multiply(qb);
+   cq[j].slerp(qa,1-Math.exp(-7*dt));}
+  else if(cp[j].y>.1){qa.setFromAxisAngle(Y,j*.9);cq[j].slerp(qa,1-Math.exp(-3*dt));}
+  else cq[j].slerp(q0[j],1-Math.exp(-4*dt));}
+}
+const lo=Array.from({length:MC},()=>new T.Vector3()),tg=Array.from({length:MC},()=>new T.Vector3());
+// attached clips are rigidly fixed to the hand: same position and direction every frame (no lag)
+function followOld(dt){
+ for(let c=0;c<C;c++){const ch=chains[c];for(let k=0;k<ch.length;k++){const j=ch[k],p=cp[j];
+  p.set(Hs.x+lo[j].x,Math.max(Hs.y+lo[j].y,.03+k*.035),Hs.z+lo[j].z);cvel[j].set(0,0,0);
+  const f=Math.max(0,Math.min(1,(.5-p.y)/.4));
+  qa.setFromAxisAngle(Y,c*.7+k*1.1);qb.copy(qa).multiply(qf);qa.slerp(qb,f);
+  cq[j].slerp(qa,1-Math.exp(-25*dt));}}
+}
+// free clips: the magnetic field attracts them only before they stick
+function simOld4(dt,t){
+ const hy=Hs.y,yb=hy-.2;
+ mp.set(Hs.x+.1,hy+.4,Hs.z);
+ if(magOn)for(let j=0;j<MC;j++){if(cst[j])continue;let best=-1,bd=1e9;
+  for(let c=0;c<C;c++){const n=chains[c].length;if(n>=K)continue;nextPos(c,n,tmp,hy);const d=cp[j].distanceTo(tmp);if(d<bd){bd=d;best=c;tg[j].copy(tmp);}}
+  if(best<0)tg[j].set(Math.max(Hs.x-.8,Math.min(Hs.x+.8,cp[j].x)),yb-.1,Math.max(Hs.z-.65,Math.min(Hs.z+.65,cp[j].z)));}
+ const h3=dt/3;
+ for(let s=0;s<3;s++)for(let j=0;j<MC;j++){if(cst[j])continue;const p=cp[j],v=cvel[j];
+  let ax=0,ay=-GR,az=0;
+  if(magOn){const dm=Math.max(.3,p.distanceTo(mp)),a=Math.min(18,GR*Math.pow(D0/dm,3));
+   tmp.copy(tg[j]).sub(p);const l=tmp.length()||1;ax=tmp.x/l*a;ay+=tmp.y/l*a;az=tmp.z/l*a;}
+  v.x+=(ax-DRAG*v.x)*h3;v.y+=(ay-DRAG*.4*v.y)*h3;v.z+=(az-DRAG*v.z)*h3;
+  p.addScaledVector(v,h3);
+  if(p.y<.02){p.y=.02;if(v.y<0)v.y=0;v.x*=.9;v.z*=.9;}
+  const rx=p.x-Hs.x,rz=p.z-Hs.z;
+  if(rz>-.85&&rz<.85&&rx>-.95&&rx<2.5&&p.y<hy+.25){const lim=(rx<.95?yb:hy-.13)-.04;if(p.y>lim){p.y=lim;if(v.y>0)v.y=0;}}}
+ if(magOn)for(let j=0;j<MC;j++){if(cst[j])continue;const p=cp[j];let best=-1,bd=1e9;
+  for(let c=0;c<C;c++){const n=chains[c].length;if(n>=K)continue;nextPos(c,n,tmp,hy);const d=p.distanceTo(tmp);if(d<bd){bd=d;best=c;}}
+  if(best>=0&&bd<.2&&t-rl[j]>1){const n=chains[best].length;cst[j]=1;cch[j]=best;clv[j]=n;chains[best].push(j);
+   lo[j].set(AX[best]+(Math.random()-.5)*.03,-.68-n*LS,AZ[best]+(Math.random()-.5)*.03);cvel[j].set(0,0,0);}}
+ for(let j=0;j<MC;j++){if(cst[j])continue;
+  if(cp[j].y>.1){qa.setFromAxisAngle(Y,j*.9);cq[j].slerp(qa,1-Math.exp(-3*dt));}
+  else cq[j].slerp(q0[j],1-Math.exp(-4*dt));}
+}
+// ===== rigid-body paper clips. states: 0 free, 1 attracted, 2 attached to hand (fixed joint), 3 released/falling =====
+const RF=1.9,reachL=l=>D0*1.15+.55*l;
+const mode=new Int8Array(MC),par=new Int16Array(MC).fill(-1),lvl=new Int8Array(MC),kid=new Uint8Array(MC),aj=new Float32Array(MC),wv=Array.from({length:MC},()=>new T.Vector3());
+const _a1=new T.Vector3(),_b1=new T.Vector3(),_c1=new T.Vector3(),wn=new T.Vector3(),dirU=new T.Vector3(),dirH=new T.Vector3(),UP=new T.Vector3(0,1,0),zv=new T.Vector3(),hv=new T.Vector3(),_q1=new T.Quaternion(),_q2=new T.Quaternion(),Q0=new T.Quaternion();
+let pHx=0,pHy=1.9,pHz=0,magFree=false,md=null,lastMT=0,carry=false,EX=.2,EZ=.2,NOW=0;const sf=new Uint8Array(MC);const toX=Float32Array.from({length:MC},()=>(Math.random()-.5)*.6),toZ=Float32Array.from({length:MC},()=>(Math.random()-.5)*.5);const mV=new T.Vector3(),_pre=new T.Vector3(),co=new T.Vector3();
+const HB=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]],MB=[0,0,0,0,0,0];
+const thr=Float32Array.from({length:MC},()=>.85+Math.random()*.3);
+// true height of the palm underside (palm + thenar + hypothenar + wrist ellipsoids) at local (rx,rz)
+function underY(rx,rz){const q=(cx,cz,sx,sz)=>1-((rx-cx)/sx)**2-((rz-cz)/sz)**2;
+ let u=-.2*Math.sqrt(Math.max(0,q(0,0,.98,.82)));
+ let k=q(-.1,.5,.55,.38);if(k>0)u=Math.min(u,-.07-.15*Math.sqrt(k));
+ k=q(-.1,-.52,.55,.3);if(k>0)u=Math.min(u,-.06-.14*Math.sqrt(k));
+ k=q(-.78,0,.5,.55);if(k>0)u=Math.min(u,-.02-.2*Math.sqrt(k));
+ return u;}
+function setB(b,a,c,d,e,f,g){b[0]=a;b[1]=c;b[2]=d;b[3]=e;b[4]=f;b[5]=g;}
+function setBoxes(){const x=Hs.x,y=Hs.y,z=Hs.z,m=magnet.position;
+ setB(HB[0],x-.98,x+.98,y-.23,y+.22,z-.85,z+.85);setB(HB[1],x+.9,x+2.5,y-.14,y+.14,z-.75,z+.75);
+ setB(HB[2],x-3.9,x-.9,y-.55,y+.55,z-.68,z+.68);setB(HB[3],x-.1,x+1,y-.2,y+.2,z+.5,z+1.3);
+ setB(MB,m.x-.6,m.x+.6,m.y-.19,m.y+.19,m.z-.23,m.z+.23);}
+function pushOut(p,v,mx,my,mz,b){
+ if(p.x<b[0]-mx||p.x>b[1]+mx||p.y<b[2]-my||p.y>b[3]+my||p.z<b[4]-mz||p.z>b[5]+mz)return -1;
+ const d=[p.x-(b[0]-mx),b[1]+mx-p.x,p.y-(b[2]-my),b[3]+my-p.y,p.z-(b[4]-mz),b[5]+mz-p.z];let k=0;for(let i=1;i<6;i++)if(d[i]<d[k])k=i;
+ if(k===0){p.x=b[0]-mx;if(v.x>0)v.x=0;}else if(k===1){p.x=b[1]+mx;if(v.x<0)v.x=0;}
+ else if(k===2){p.y=b[2]-my;if(v.y>0)v.y=0;}else if(k===3){p.y=b[3]+my;if(v.y<0)v.y=0;}
+ else if(k===4){p.z=b[4]-mz;if(v.z>0)v.z=0;}else{p.z=b[5]+mz;if(v.z<0)v.z=0;}
+ return k;}
+function ext(q){_a1.set(0,1,0).applyQuaternion(q);_b1.set(1,0,0).applyQuaternion(q);_c1.set(0,0,1).applyQuaternion(q);
+ EX=.44*Math.abs(_a1.x)+.17*Math.abs(_b1.x)+.03*Math.abs(_c1.x)+.06;EZ=.44*Math.abs(_a1.z)+.17*Math.abs(_b1.z)+.03*Math.abs(_c1.z)+.06;
+ return .44*Math.abs(_a1.y)+.17*Math.abs(_b1.y)+.03*Math.abs(_c1.y)+.005;}
+function alignAxis(q,x,y,z,dir,f){_a1.set(x,y,z).applyQuaternion(q);_b1.copy(dir);if(_a1.dot(_b1)<0)_b1.negate();
+ _q1.setFromUnitVectors(_a1,_b1);_q2.copy(Q0).slerp(_q1,f);q.premultiply(_q2);}
+// the magnet can be moved freely in X, Y, Z (it never passes through the hand)
+function resolveMagnet(){const m=magnet.position;m.x=Math.max(-8,Math.min(8,m.x));m.z=Math.max(-8,Math.min(8,m.z));m.y=Math.max(.19,Math.min(6.5,m.y));
+ setBoxes();zv.set(0,0,0);for(const b of HB)pushOut(m,zv,.6,.19,.23,b);m.y=Math.max(.19,m.y);}
+// dynamic magnet after release: gravity + collisions (floor, hand) with small bounce
+function magnetStep(dt){const m=magnet.position,v=mV,h=dt/3;
+ if(carry){if(hv.y<-6||md){carry=false;v.copy(hv).clampLength(0,5);}else{m.set(Hs.x+co.x,Hs.y+.41,Hs.z+co.z);v.copy(hv).clampLength(0,5);return;}}
+ for(let s=0;s<3;s++){
+  v.y-=GR*h;v.multiplyScalar(Math.exp(-.15*h));m.addScaledVector(v,h);setBoxes();
+  for(const b of HB){_pre.copy(v);const k=pushOut(m,v,.6,.19,.23,b);
+   if(k===3){const rel=_pre.y-hv.y;if(rel<-3){v.y=hv.y-rel*.3;}else{carry=true;co.set(m.x-Hs.x,0,m.z-Hs.z);m.y=Hs.y+.41;v.copy(hv).clampLength(0,5);return;}}
+   else if(k===2){if(_pre.y>.8)v.y=-_pre.y*.3;}
+   else if(k===0||k===1){if(Math.abs(_pre.x)>.8)v.x=-_pre.x*.3;}
+   else if(k===4||k===5){if(Math.abs(_pre.z)>.8)v.z=-_pre.z*.3;}}
+  if(m.y<.19){m.y=.19;if(v.y<-.8)v.y=-v.y*.3;else v.y=0;const f=Math.exp(-6*h);v.x*=f;v.z*=f;}
+  m.x=Math.max(-8,Math.min(8,m.x));m.z=Math.max(-8,Math.min(8,m.z));m.y=Math.min(m.y,6.5);}
+}
+function snapMagnet(){const hp=new T.Vector3(Hs.x,Hs.y,Hs.z).add(mag_off);if(magOn&&magnet.position.distanceTo(hp)<.6)magFree=false;}
+function release(j,t){const pj=par[j];sf[j]=0;mode[j]=3;cst[j]=0;par[j]=-1;kid[j]=0;if(pj>=0)kid[pj]=0;cvel[j].copy(hv).clampLength(0,3);
+ wv[j].set((Math.random()-.5)*4,(Math.random()-.5)*4,(Math.random()-.5)*4);rl[j]=t;
+ for(let i=0;i<MC;i++)if(mode[i]===2&&par[i]===j)release(i,t);}
+function doAttach(j,pj,L,x,y,z){sf[j]=0;mode[j]=2;cst[j]=1;par[j]=pj;if(pj>=0)kid[pj]=1;lvl[j]=L;lo[j].set(x,y,z);cvel[j].set(0,0,0);wv[j].set(0,0,0);}
+function tryAttach(j,t,yb){
+ if(t-rl[j]<.6)return;const p=cp[j];
+ for(let i=0;i<MC;i++){if(mode[i]!==2||kid[i]||sf[i]||lvl[i]>=K-1)continue;const q=cp[i];
+  if(Math.hypot(q.x-p.x,q.z-p.z)<.28){const dy=q.y-p.y;if(dy>.15&&dy<LS*1.2){const L=lvl[i]+1;if(p.distanceTo(mp)>reachL(L)-.12)continue;
+   doAttach(j,i,L,lo[i].x+(Math.random()-.5)*.03,lo[i].y-LS,lo[i].z+(Math.random()-.5)*.03);return;}}}
+ const rx=p.x-Hs.x,rz=p.z-Hs.z;
+ if(Math.abs(rx)<.8&&Math.abs(rz)<.65&&p.y<yb&&p.y>yb-ext(cq[j])-.07&&p.distanceTo(mp)<reachL(0)-.12){
+  for(let i=0;i<MC;i++)if(mode[i]===2&&lvl[i]===0&&Math.hypot(lo[i].x-rx,lo[i].z-rz)<.34)return;
+  doAttach(j,-1,0,rx,underY(rx,rz)-.47,rz);}}
+// free-body step: gravity, magnetic force (depends on distance, zero outside the field), collisions
+function freeStep(dt,F,coup){
+ const h=dt/3,fT=1-Math.exp(-9*h),fA=1-Math.exp(-10*h),yb=Hs.y-.2;
+ for(let s=0;s<3;s++){
+  for(let j=0;j<MC;j++){if(mode[j]===2)continue;const p=cp[j],v=cvel[j],q=cq[j];let a=0;
+   if(F){const d=p.distanceTo(mp);if(d<RF){a=Math.min(18,GR*Math.pow(D0*thr[j]/Math.max(d,.3),3));
+    if(coup&&Math.abs(p.x-Hs.x)<1&&Math.abs(p.z-Hs.z)<.9&&p.y>yb-.1)a=0;if(coup)tmp.set(Math.max(Hs.x-.75,Math.min(Hs.x+.75,p.x+toX[j])),yb-.47,Math.max(Hs.z-.6,Math.min(Hs.z+.6,p.z+toZ[j])));else tmp.copy(mp);
+    dirU.copy(tmp).sub(p);const l=dirU.length();if(l>1e-4)dirU.multiplyScalar(1/l);else dirU.copy(UP);}}
+   // induced magnetism: a magnetized clip attracts a nearby clip toward its free end (gradual, distance dependent)
+   let ix=0,iy=0,iz=0,ia=0;
+   {let bi=-1,bd=.81,tx=0,ty=0,tz=0;
+    for(let i=0;i<MC;i++){if(i===j)continue;const mi=mode[i];if(!(mi===2&&!kid[i]&&!sf[i]&&lvl[i]<K-1)&&!(mi===1&&aj[i]>GR*.5))continue;
+     const q2=cp[i],dx=q2.x-p.x,dy=q2.y-LS-p.y,dz=q2.z-p.z,d2=dx*dx+dy*dy+dz*dz;if(d2<bd){bd=d2;bi=i;tx=dx;ty=dy;tz=dz;}}
+    if(bi>=0){const dd=Math.sqrt(bd)||1,dc=Math.max(.15,dd),sg=mode[bi]===2?Math.pow(.8,lvl[bi]):.6;ia=Math.min(14,GR*sg*Math.pow(.55/dc,3));ix=tx/dd*ia;iy=ty/dd*ia;iz=tz/dd*ia;if(a>0&&coup&&mode[bi]===2&&p.y<Hs.y)dirU.set(tx/dd,ty/dd,tz/dd);}}
+   const dr=(a>0||ia>0)?4.5:.3;
+   v.x+=(dirU.x*a+ix-dr*v.x)*h;v.y+=(dirU.y*a+iy-GR-dr*v.y)*h;v.z+=(dirU.z*a+iz-dr*v.z)*h;
+   p.addScaledVector(v,h);
+   if(a>GR*.9)alignAxis(q,0,1,0,dirU,fA);
+   else{const w=wv[j],wl=w.length();if(wl>.02){wn.copy(w).multiplyScalar(1/wl);_q2.setFromAxisAngle(wn,wl*h);q.premultiply(_q2);w.multiplyScalar(Math.exp(-.8*h));}}
+   if(s===0)mode[j]=a>0?1:(mode[j]===1?3:mode[j]);
+   aj[j]=a;}
+  for(let i=0;i<MC;i++){if(mode[i]===2)continue;const pi=cp[i];for(let k=i+1;k<MC;k++){if(mode[k]===2)continue;const pk=cp[k];
+   const dx=pk.x-pi.x,dy=pk.y-pi.y,dz=pk.z-pi.z,d2=dx*dx+dy*dy+dz*dz;
+   if(d2<.0049&&d2>1e-10){const d=Math.sqrt(d2),m=(.07-d)/(2*d);pi.x-=dx*m;pi.y-=dy*m;pi.z-=dz*m;pk.x+=dx*m;pk.y+=dy*m;pk.z+=dz*m;}}}
+  for(let j=0;j<MC;j++){if(mode[j]===2)continue;const p=cp[j],v=cvel[j],q=cq[j],e=ext(q),fl=aj[j]<=GR*.9;
+   let hit=0;for(let bi=0;bi<4;bi++){const kk=pushOut(p,v,EX,e,EZ,HB[bi]);if(kk>=0&&kk!==2)hit=1;}if(pushOut(p,v,EX,e,EZ,MB)>=0)hit=1;
+   if(false&&hit&&coup&&aj[j]>GR*.9&&v.lengthSq()<.8&&NOW-rl[j]>.6){doAttach(j,-1,0,p.x-Hs.x,p.y-Hs.y,p.z-Hs.z);sf[j]=1;continue;}
+   if(p.y<e){p.y=e;if(v.y<0)v.y*=-.15;v.x*=.85;v.z*=.85;wv[j].multiplyScalar(.6);}
+   else if(fl&&p.y<e+.03&&v.y<=.1)p.y=e;
+   if(fl&&p.y<=e+.004){_a1.set(0,1,0).applyQuaternion(q);dirH.set(_a1.x,0,_a1.z);if(dirH.lengthSq()<1e-4)dirH.set(1,0,0);else dirH.normalize();
+    alignAxis(q,0,1,0,dirH,fT);alignAxis(q,0,0,1,UP,fT);
+    if(v.lengthSq()<.01)v.set(0,0,0);if(mode[j]===3)mode[j]=0;}}
+ }
+}
+function settlePile(){mp.copy(magnet.position);setBoxes();MB.fill(1e6);for(let i=0;i<120;i++)freeStep(1/60,false,false);}
+function sim(dt,t){
+ if(dt<=0)return;
+ NOW=t;hand.position.set(Hs.x,Hs.y,Hs.z);placeMagnet();
+ hv.set((Hs.x-pHx)/dt,(Hs.y-pHy)/dt,(Hs.z-pHz)/dt);if(hv.length()>10)hv.setLength(10);pHx=Hs.x;pHy=Hs.y;pHz=Hs.z;
+ if(magFree&&!md)magnetStep(dt);
+ mp.copy(magnet.position);setBoxes();
+ const coup=Math.abs(mp.x-Hs.x)<1.5&&Math.abs(mp.z-Hs.z)<1.1&&mp.y-Hs.y>0&&mp.y-Hs.y<1.3;
+ for(let j=0;j<MC;j++)if(mode[j]===2){tmp.set(Hs.x+lo[j].x,Hs.y+lo[j].y,Hs.z+lo[j].z);const d=tmp.distanceTo(mp);if(!coup||d>reachL(lvl[j]))release(j,t);}
+ freeStep(dt,true,coup);
+ if(coup)for(let j=0;j<MC;j++)if(mode[j]!==2)tryAttach(j,t,Hs.y-.2);
+}
+// attached clips are fixed to the hand: identical position and speed every frame
+function follow(dt){setBoxes();for(let j=0;j<MC;j++){if(mode[j]!==2)continue;const p=cp[j],L=lvl[j];
+ if(sf[j]){p.set(Hs.x+lo[j].x,Hs.y+lo[j].y,Hs.z+lo[j].z);const es=ext(cq[j]);if(p.y<es-.02){cq[j].setFromAxisAngle(Y,j*.9).multiply(qf);p.y=.04;release(j,NOW);continue;}p.y=Math.max(p.y,es+.002);cvel[j].set(0,0,0);continue;}
+ p.set(Hs.x+lo[j].x,Math.max(Hs.y+lo[j].y,.03+L*.035),Hs.z+lo[j].z);cvel[j].set(0,0,0);
+ const f=Math.max(0,Math.min(1,(.5-p.y)/.4));qa.setFromAxisAngle(Y,j*.9);qb.copy(qa).multiply(qf);qa.slerp(qb,f);
+ cq[j].slerp(qa,1-Math.exp(-25*dt));const e=ext(cq[j]);for(let bi=1;bi<4;bi++){if(pushOut(p,cvel[j],EX,e,EZ,HB[bi])>=0)lo[j].set(p.x-Hs.x,p.y-Hs.y,p.z-Hs.z);}p.y=Math.max(e+.002,Math.min(p.y,Hs.y+underY(lo[j].x,lo[j].z)-.02-e));}}
+// labels
+const LB=[['اليد',()=>tmp.set(1.7,Hs.y+.3,.2)],['ساق مغناطيسية',()=>tmp.copy(magnet.position).add(new T.Vector3(0,.55,0))],['مثبتات الورق',()=>tmp.set(-1.4,.3,1.1)]].map(([t,f])=>{const el=document.createElement('div');el.className='lbl';el.textContent=t;$('#wrap').appendChild(el);return{el,f};});
+const clock=new T.Clock();
+function loop(){requestAnimationFrame(loop);const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
+ if(!paused){
+  for(let i=tws.length-1;i>=0;i--){const w=tws[i];w.t+=dt;const u=Math.min(1,w.t/w.dur),e=w.ease?(u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2):1-Math.pow(1-u,3);
+   w.o[w.k]=w.f+(w.to-w.f)*e;if(u>=1){tws.splice(i,1);if(w.done)w.done();if(!tws.length)$('#main').disabled=false;}}
+  sim(dt,t);
+  if(step===2&&!busy()&&Hs.y>HMAX-.2)setStep(3);}
+ follow(dt);hand.position.set(Hs.x,Hs.y,Hs.z);placeMagnet();
+ if(document.activeElement!==$('#hy'))$('#hy').value=Math.max(0,Math.min(100,(Hs.y-restY)/(HMAX-restY)*100));
+ for(let j=0;j<MC;j++){M4.compose(cp[j],cq[j],one);cm_.setMatrixAt(j,M4);}cm_.instanceMatrix.needsUpdate=true;
+ lines.visible=linesOn&&(magOn||Mu.u>0);
+ applyCam();
+ const w=stage.clientWidth,h=stage.clientHeight;
+ LB.forEach(l=>{if(!labsOn){l.el.hidden=true;return;}l.f();tmp.project(camera);l.el.hidden=tmp.z>1;l.el.style.left=(tmp.x*.5+.5)*w+'px';l.el.style.top=(-tmp.y*.5+.5)*h+'px';});
+ renderer.render(scene,camera);}
+placeMagnet();initClips();resize();setStep(0);view(.6,1.15,1.5);cam.r=goal.r;loop();
+</script>
+</body>
+</html>
